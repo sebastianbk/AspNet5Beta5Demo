@@ -16,8 +16,6 @@ namespace WebApplication11
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddTransient<IBlogRepo, BlogRepo>();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -28,17 +26,19 @@ namespace WebApplication11
                     name: "default",
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = "Home", action = "Index" });
-            }).Use(async (HttpContext httpcontext, Func<Task> next) =>
-            {
-                var sw = Stopwatch.StartNew();
+            });
 
-                httpcontext.Response.OnSendingHeaders((state) =>
-                {
-                    sw.Stop();
-                    httpcontext.Response.Headers.Add("X-Response-Time", new string[] { sw.ElapsedMilliseconds.ToString() + "ms" });
-                }, null);
-                await next.Invoke();
-            }); ;
+            //app.Use(async (HttpContext httpcontext, Func<Task> next) =>
+            //{
+            //    var sw = Stopwatch.StartNew();
+
+            //    httpcontext.Response.OnSendingHeaders((state) =>
+            //    {
+            //        sw.Stop();
+            //        httpcontext.Response.Headers.Add("X-Response-Time", new string[] { sw.ElapsedMilliseconds.ToString() + "ms" });
+            //    }, null);
+            //    await next.Invoke();
+            //});
         }
     }
 }
