@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
-using WebApplication11.Repositories;
 using System.Diagnostics;
 
 namespace WebApplication11
@@ -20,6 +19,36 @@ namespace WebApplication11
 
         public void Configure(IApplicationBuilder app)
         {
+            //app.Use(async (HttpContext httpContext, Func<Task> next) =>
+            //{
+            //    var sw = Stopwatch.StartNew();
+
+            //    httpContext.Response.OnSendingHeaders((state) =>
+            //    {
+            //        sw.Stop();
+            //        httpContext.Response.Headers.Add("X-Response-Time", new string[] { sw.ElapsedMilliseconds.ToString() + "ms" });
+            //    }, null);
+
+            //    await next.Invoke();
+            //});
+
+            //app.Use(async (HttpContext httpContext, Func<Task> next) =>
+            //{
+            //    Debug.WriteLine("Begin Request");
+            //    await next.Invoke();
+            //    Debug.WriteLine("End Request");
+            //});
+
+            //app.Use(async (HttpContext httpContext, Func<Task> next) =>
+            //{
+            //    httpContext.Response.OnSendingHeaders((state) =>
+            //    {
+            //        httpContext.Response.Headers.Add("Content-Security-Policy", new string[] { "script-src 'self' https://apis.google.com" });
+            //    }, null);
+
+            //    await next.Invoke();
+            //});
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -27,18 +56,6 @@ namespace WebApplication11
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-            //app.Use(async (HttpContext httpcontext, Func<Task> next) =>
-            //{
-            //    var sw = Stopwatch.StartNew();
-
-            //    httpcontext.Response.OnSendingHeaders((state) =>
-            //    {
-            //        sw.Stop();
-            //        httpcontext.Response.Headers.Add("X-Response-Time", new string[] { sw.ElapsedMilliseconds.ToString() + "ms" });
-            //    }, null);
-            //    await next.Invoke();
-            //});
         }
     }
 }

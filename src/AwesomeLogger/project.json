@@ -7,8 +7,6 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Microsoft.AspNet.Http.Core": "1.0.0-*",
-    "Microsoft.AspNet.Http.Extensions": "1.0.0-*",
     "Microsoft.AspNet.Http.Abstractions": "1.0.0-*"
   },
 

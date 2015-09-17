@@ -19,17 +19,11 @@ namespace AwesomeLogger
             this.next = next;
         }
 
-        public Task Invoke(HttpRequest context)
+        public async Task Invoke(HttpContext context)
         {
-            var sw = Stopwatch.StartNew();
-
-            context.Response.OnSendingHeaders((state) =>
-            {
-                sw.Stop();
-                context.Response.Headers.Add("X-Response-Time", new string[] { sw.ElapsedMilliseconds.ToString() + "ms" });
-            }, null);
-
-            return next(context);
+            Debug.WriteLine("Request Started");
+            await next(context);
+            Debug.WriteLine("Request Ended");
         }
     }
 }
